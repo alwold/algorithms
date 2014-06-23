@@ -53,7 +53,8 @@ int *sort(int *list, int count) {
     int list1[size1];
     int list2[size2];
     memcpy(list1, list, size1*sizeof(int));
-    memcpy(list2, &list[size1], size2*sizeof(int));
+    // memcpy(list2, &list[size1], size2*sizeof(int));
+    memcpy(list2, list+size1, size2*sizeof(int));
     int* new_list1 = sort(list1, size1);
     int* new_list2 = sort(list2, size2);
     int* new_list = merge(new_list1, size1, new_list2, size2);
