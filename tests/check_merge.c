@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../src/merge.h"
 #include "../src/quick_sort.h"
+#include "../src/linked_list.h"
 
 START_TEST (test_merge)
 {
@@ -45,6 +46,25 @@ START_TEST (test_quick_sort)
 }
 END_TEST
 
+START_TEST (test_linked_list_create)
+{
+  int data[] = {1, 2, 3, 4, 5, 6};
+  node *list = linked_list_create(data, 6);
+  node *current = list;
+  ck_assert_int_eq(current->data, 1);
+  current = current->next;
+  ck_assert_int_eq(current->data, 2);
+  current = current->next;
+  ck_assert_int_eq(current->data, 3);
+  current = current->next;
+  ck_assert_int_eq(current->data, 4);
+  current = current->next;
+  ck_assert_int_eq(current->data, 5);
+  current = current->next;
+  ck_assert_int_eq(current->data, 6);
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -54,6 +74,9 @@ Suite *merge_suite(void) {
   tcase_add_test(qs, test_partition);
   tcase_add_test(qs, test_quick_sort);
   suite_add_tcase(s, qs);
+  TCase *ll = tcase_create("Linked List");
+  tcase_add_test(ll, test_linked_list_create);
+  suite_add_tcase(s, ll);
   return s;
 }
 
