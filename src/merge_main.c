@@ -1,4 +1,5 @@
 #include "merge.h"
+#include "util.h"
 
 int main(int argc, char **argv) {
   int list[] = {3, 1, 2, 7, 5, 6};

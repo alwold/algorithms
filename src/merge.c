@@ -2,17 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 
-void print_list(int *new_list, int count) {
-   for (int i = 0; i < count; i++) {
-     printf("%d", new_list[i]);
-     if (i != count-1) {
-       printf(", ");
-     } else {
-       printf("\n");
-     }
-   }
-}
-
 int* merge(int* list1, int count1, int* list2, int count2) {
   int *list = malloc(sizeof(int)*(count1+count2));
   int i = 0;
