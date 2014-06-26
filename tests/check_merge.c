@@ -1,6 +1,7 @@
 #include <check.h>
 #include <stdlib.h>
 #include "../src/merge.h"
+#include "../src/quick_sort.h"
 
 START_TEST (test_merge)
 {
@@ -16,11 +17,43 @@ START_TEST (test_merge)
 }
 END_TEST
 
+START_TEST (test_partition)
+{
+  int list[] = {2, 8, 7, 1, 4, 5, 6, 3};
+  partition(list, 8);
+  ck_assert_int_eq(list[0], 2);
+  ck_assert_int_eq(list[1], 1);
+  ck_assert_int_eq(list[2], 3);
+  ck_assert_int_eq(list[3], 4);
+  ck_assert_int_eq(list[4], 7);
+  ck_assert_int_eq(list[5], 5);
+  ck_assert_int_eq(list[6], 6);
+  ck_assert_int_eq(list[7], 8);
+}
+END_TEST
+
+START_TEST (test_quick_sort)
+{
+  int list[] = {3, 1, 2, 7, 5, 6};
+  quick_sort(list, 6);
+  ck_assert_int_eq(list[0], 1);
+  ck_assert_int_eq(list[1], 2);
+  ck_assert_int_eq(list[2], 3);
+  ck_assert_int_eq(list[3], 5);
+  ck_assert_int_eq(list[4], 6);
+  ck_assert_int_eq(list[5], 7);
+}
+END_TEST
+
 Suite *merge_suite(void) {
-  Suite *s = suite_create("Merge Sort");
-  TCase *tc_core = tcase_create("Core");
-  tcase_add_test(tc_core, test_merge);
-  suite_add_tcase(s, tc_core);
+  Suite *s = suite_create("Algorithms");
+  TCase *ms = tcase_create("Merge Sort");
+  tcase_add_test(ms, test_merge);
+  suite_add_tcase(s, ms);
+  TCase *qs = tcase_create("Quick Sort");
+  tcase_add_test(qs, test_partition);
+  tcase_add_test(qs, test_quick_sort);
+  suite_add_tcase(s, qs);
   return s;
 }
 
