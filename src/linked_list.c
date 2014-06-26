@@ -2,7 +2,18 @@
 #include <stdlib.h>
 
 node* linked_list_reverse(node* head) {
-  return head;
+  if (head->next != NULL) {
+    node *new_head = linked_list_reverse(head->next);
+    node *current = new_head;
+    while (current->next != NULL) {
+      current = current->next;
+    }
+    current->next = head;
+    head->next = NULL;
+    return new_head;
+  } else {
+    return head;
+  }
 }
 
 node* linked_list_create(int* data, int count) {
