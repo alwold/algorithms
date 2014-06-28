@@ -1,0 +1,26 @@
+# autotools stuff
+Makefile
+/aclocal.m4
+/autom4te.cache
+/compile
+/configure
+/depcomp
+/install-sh
+/missing
+/test-driver
+/config.log
+/config.status
+.deps
+
+# test results
+*.log
+*.trs
+
+# binaries
+*.o
+*.in
+/src/heap
+/src/linked_list
+/src/merge
+/src/quick_sort
+/tests/check_merge
