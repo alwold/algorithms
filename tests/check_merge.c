@@ -3,6 +3,8 @@
 #include "../src/merge.h"
 #include "../src/quick_sort.h"
 #include "../src/linked_list.h"
+#include "../src/heap.h"
+#include "../src/util.h"
 
 START_TEST (test_merge)
 {
@@ -85,6 +87,18 @@ START_TEST (test_linked_list_reverse)
 }
 END_TEST
 
+START_TEST (test_heapify)
+{
+  int data[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  heapify(data, 9);
+  print_heap(data, 9);
+  for (int i = 0; i < 9/2; i++) {
+    ck_assert_int_ge(data[i], data[heap_left(i)]);
+    ck_assert_int_ge(data[i], data[heap_right(i)]);
+  }
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -98,6 +112,9 @@ Suite *merge_suite(void) {
   tcase_add_test(ll, test_linked_list_create);
   tcase_add_test(ll, test_linked_list_reverse);
   suite_add_tcase(s, ll);
+  TCase *heap = tcase_create("Heaps");
+  tcase_add_test(heap, test_heapify);
+  suite_add_tcase(s, heap);
   return s;
 }
 
