@@ -99,6 +99,19 @@ START_TEST (test_heapify)
 }
 END_TEST
 
+START_TEST (test_heapsort)
+{
+  int list[] = {2, 8, 7, 1, 4, 5, 6, 3};
+  int count = 8;
+  heap_sort(list, count);
+  int last = -1;
+  for (int i = 0; i < count; i++) {
+    ck_assert_int_ge(list[i], last);
+    last = list[i];
+  }
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -114,6 +127,7 @@ Suite *merge_suite(void) {
   suite_add_tcase(s, ll);
   TCase *heap = tcase_create("Heaps");
   tcase_add_test(heap, test_heapify);
+  tcase_add_test(heap, test_heapsort);
   suite_add_tcase(s, heap);
   return s;
 }
