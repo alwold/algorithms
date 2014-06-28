@@ -125,14 +125,22 @@ END_TEST
 
 START_TEST (test_bst_insert)
 {
-  bst_node *root = bst_node_create(1);
-  bst_insert(root, 2);
+  bst_node *root = bst_node_create(3);
+  bst_insert(root, 5);
 
   ck_assert_ptr_eq(root->left, NULL);
   ck_assert_ptr_ne(root->right, NULL);
-  ck_assert_int_eq(root->right->data, 2);
+  ck_assert_int_eq(root->right->data, 5);
   ck_assert_ptr_eq(root->right->left, NULL);
   ck_assert_ptr_eq(root->right->right, NULL);
+
+  bst_insert(root, 1);
+  ck_assert_ptr_ne(root->left, NULL);
+  ck_assert_int_eq(root->left->data, 1);
+
+  bst_insert(root, 99);
+  ck_assert_ptr_ne(root->right->right, NULL);
+  ck_assert_int_eq(root->right->right->data, 99);
 }
 END_TEST
 
