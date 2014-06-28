@@ -1,10 +1,12 @@
 #include <check.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "../src/merge.h"
 #include "../src/quick_sort.h"
 #include "../src/linked_list.h"
 #include "../src/heap.h"
 #include "../src/util.h"
+#include "../src/bst.h"
 
 START_TEST (test_merge)
 {
@@ -112,6 +114,28 @@ START_TEST (test_heapsort)
 }
 END_TEST
 
+START_TEST (test_bst_node_create)
+{
+  bst_node *root = bst_node_create(1);
+  ck_assert_ptr_eq(root->left, NULL);
+  ck_assert_ptr_eq(root->right, NULL);
+  ck_assert_int_eq(root->data, 1);
+}
+END_TEST
+
+START_TEST (test_bst_insert)
+{
+  bst_node *root = bst_node_create(1);
+  bst_insert(root, 2);
+
+  ck_assert_ptr_eq(root->left, NULL);
+  ck_assert_ptr_ne(root->right, NULL);
+  ck_assert_int_eq(root->right->data, 2);
+  ck_assert_ptr_eq(root->right->left, NULL);
+  ck_assert_ptr_eq(root->right->right, NULL);
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -129,6 +153,10 @@ Suite *merge_suite(void) {
   tcase_add_test(heap, test_heapify);
   tcase_add_test(heap, test_heapsort);
   suite_add_tcase(s, heap);
+  TCase *bst = tcase_create("Binary Search Tree");
+  tcase_add_test(bst, test_bst_node_create);
+  tcase_add_test(bst, test_bst_insert);
+  suite_add_tcase(s, bst);
   return s;
 }
 

@@ -23,4 +23,5 @@ Makefile
 /src/linked_list
 /src/merge
 /src/quick_sort
+/src/bst
 /tests/check_merge
