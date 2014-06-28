@@ -9,6 +9,9 @@ struct bst_node {
 typedef struct bst_node bst_node;
 
 bst_node* bst_node_create(int data);
+
 void bst_insert(bst_node* root, int data);
+
+void bst_delete(bst_node* root, bst_node* target);
 
 #endif

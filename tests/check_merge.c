@@ -144,6 +144,18 @@ START_TEST (test_bst_insert)
 }
 END_TEST
 
+START_TEST (test_bst_delete)
+{
+  bst_node *root = bst_node_create(3);
+  bst_insert(root, 5);
+  bst_insert(root, 1);
+  bst_insert(root, 99);
+
+  bst_delete(root, root->right); // this one is the 5, and it has 99 under it, to the right
+  ck_assert_int_eq(root->right->data, 99);
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -164,6 +176,7 @@ Suite *merge_suite(void) {
   TCase *bst = tcase_create("Binary Search Tree");
   tcase_add_test(bst, test_bst_node_create);
   tcase_add_test(bst, test_bst_insert);
+  tcase_add_test(bst, test_bst_delete);
   suite_add_tcase(s, bst);
   return s;
 }
