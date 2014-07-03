@@ -47,5 +47,16 @@ void bst_delete(bst_node* root, bst_node* target) {
 }
 
 bst_node* bst_successor(bst_node* source) {
-  return source;
+  if (source->right != NULL) {
+    return source->right;
+  } else {
+    // go up the tree until we find an ancestor that is the left child of something
+    // when that is true, the parent of the left child is the successor
+    bst_node *ancestor = source->parent;
+    while (ancestor && ancestor->right == source) {
+      source = ancestor;
+      ancestor = source->parent;
+    }
+    return ancestor;
+  }
 }

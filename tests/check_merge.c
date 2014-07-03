@@ -148,7 +148,7 @@ START_TEST (test_bst_successor)
 {
   bst_node *root = bst_node_create(3);
   bst_insert(root, 6);
-  bst_insert(root, 10);
+  bst_node* ten = bst_insert(root, 10);
   bst_insert(root, 1);
   bst_insert(root, 4);
   bst_insert(root, 2);
@@ -157,6 +157,7 @@ START_TEST (test_bst_successor)
   bst_insert(root, 7);
   bst_node* five = bst_insert(root, 5);
   ck_assert_int_eq(bst_successor(five)->data, 6);
+  ck_assert_ptr_eq(bst_successor(ten), NULL);
 }
 END_TEST
 
