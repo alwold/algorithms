@@ -144,6 +144,22 @@ START_TEST (test_bst_insert)
 }
 END_TEST
 
+START_TEST (test_bst_successor)
+{
+  bst_node *root = bst_node_create(3);
+  bst_insert(root, 6);
+  bst_insert(root, 10);
+  bst_insert(root, 1);
+  bst_insert(root, 4);
+  bst_insert(root, 2);
+  bst_insert(root, 8);
+  bst_insert(root, 9);
+  bst_insert(root, 7);
+  bst_node* five = bst_insert(root, 5);
+  ck_assert_int_eq(bst_successor(five)->data, 6);
+}
+END_TEST
+
 START_TEST (test_bst_delete)
 {
   bst_node *root = bst_node_create(3);
@@ -176,6 +192,7 @@ Suite *merge_suite(void) {
   TCase *bst = tcase_create("Binary Search Tree");
   tcase_add_test(bst, test_bst_node_create);
   tcase_add_test(bst, test_bst_insert);
+  tcase_add_test(bst, test_bst_successor);
   tcase_add_test(bst, test_bst_delete);
   suite_add_tcase(s, bst);
   return s;
