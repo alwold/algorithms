@@ -35,5 +35,25 @@ node* linked_list_create(int* data, int count) {
 }
 
 int linked_list_mth_last_element(node *head, int m) {
-  return -1;
+  // sample = {1, 2, 3, 4, 5, 6}
+  // first advance the list to the mth position
+  node* leading = head;
+  // leading = 1
+  for (int i = 0; i < m; i++) {
+    leading = leading->next;
+    // if we hit the end of the list, there's no mth last element, so return null
+    if (leading == NULL) {
+      return NULL;
+    }
+  }
+  // leading = 4
+  node *trailing = head;
+  // trailing = 1
+  while (leading->next != NULL) {
+    leading = leading->next;
+    trailing = trailing->next;
+  }
+  // leading = 6
+  // trailing = 3
+  return trailing->data;
 }
