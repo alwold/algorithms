@@ -33,3 +33,7 @@ node* linked_list_create(int* data, int count) {
   }
   return head;
 }
+
+int linked_list_mth_last_element(node *head, int m) {
+  return -1;
+}

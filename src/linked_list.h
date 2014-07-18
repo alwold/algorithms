@@ -11,4 +11,6 @@ node* linked_list_create(int* data, int count);
 
 node* linked_list_reverse(node* head);
 
+int linked_list_mth_last_element(node *head, int m);
+
 #endif

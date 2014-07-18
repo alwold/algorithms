@@ -89,6 +89,14 @@ START_TEST (test_linked_list_reverse)
 }
 END_TEST
 
+START_TEST (test_linked_list_mth_last_element)
+{
+  int data[] = {1, 2, 3, 4, 5, 6};
+  node *list = linked_list_create(data, 6);
+  ck_assert_int_eq(linked_list_mth_last_element(list, 3), 3);
+}
+END_TEST
+
 START_TEST (test_heapify)
 {
   int data[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -185,6 +193,7 @@ Suite *merge_suite(void) {
   TCase *ll = tcase_create("Linked List");
   tcase_add_test(ll, test_linked_list_create);
   tcase_add_test(ll, test_linked_list_reverse);
+  tcase_add_test(ll, test_linked_list_mth_last_element);
   suite_add_tcase(s, ll);
   TCase *heap = tcase_create("Heaps");
   tcase_add_test(heap, test_heapify);
