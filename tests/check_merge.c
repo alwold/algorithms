@@ -277,10 +277,14 @@ END_TEST
 START_TEST (test_stack)
 {
   stack *s = stack_init(10);
-  stack_push(s, 1);
-  stack_push(s, 2);
-  ck_assert_int_eq(stack_pop(s), 2);
-  ck_assert_int_eq(stack_pop(s), 1);
+  int x = 1;
+  stack_push(s, &x);
+  int y = 2;
+  stack_push(s, &y);
+  int *a = (int *)stack_pop(s);
+  ck_assert_int_eq(*a, 2);
+  int *b = (int *)stack_pop(s);
+  ck_assert_int_eq(*b, 1);
   ck_assert_ptr_eq(stack_pop(s), NULL);
 }
 END_TEST
