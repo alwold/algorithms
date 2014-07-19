@@ -97,9 +97,9 @@ START_TEST (test_linked_list_mth_last_element)
   node *list = linked_list_create(data, 6);
   ck_assert_int_eq(linked_list_mth_last_element(list, 3), 3);
   list = linked_list_create(data, 3);
-  ck_assert_ptr_eq(linked_list_mth_last_element(list, 0), 3);
-  ck_assert_ptr_eq(linked_list_mth_last_element(list, 3), NULL);
-  ck_assert_ptr_eq(linked_list_mth_last_element(list, 2), 1);
+  ck_assert_int_eq(linked_list_mth_last_element(list, 0), 3);
+  ck_assert_ptr_eq(linked_list_mth_last_element(list, 3), -1);
+  ck_assert_int_eq(linked_list_mth_last_element(list, 2), 1);
 }
 END_TEST
 

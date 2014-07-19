@@ -43,7 +43,7 @@ int linked_list_mth_last_element(node *head, int m) {
     leading = leading->next;
     // if we hit the end of the list, there's no mth last element, so return null
     if (leading == NULL) {
-      return NULL;
+      return -1;
     }
   }
   // leading = 4
