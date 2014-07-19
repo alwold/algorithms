@@ -8,6 +8,7 @@
 #include "../src/util.h"
 #include "../src/bst.h"
 #include "../src/linked_list_tree.h"
+#include "../src/stack.h"
 
 START_TEST (test_merge)
 {
@@ -273,6 +274,17 @@ START_TEST (test_linked_list_tree_flatten)
 }
 END_TEST
 
+START_TEST (test_stack)
+{
+  stack *s = stack_init(10);
+  stack_push(s, 1);
+  stack_push(s, 2);
+  ck_assert_int_eq(stack_pop(s), 2);
+  ck_assert_int_eq(stack_pop(s), 1);
+  ck_assert_ptr_eq(stack_pop(s), NULL);
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -300,6 +312,9 @@ Suite *merge_suite(void) {
   tcase_add_test(bst, test_bst_successor);
   tcase_add_test(bst, test_bst_delete);
   suite_add_tcase(s, bst);
+  TCase *stack = tcase_create("Stack");
+  tcase_add_test(stack, test_stack);
+  suite_add_tcase(s, stack);
   return s;
 }
 
