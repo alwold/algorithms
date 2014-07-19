@@ -199,6 +199,8 @@ START_TEST (test_linked_list_tree)
   ck_assert_int_eq(list->head->next->next->value, 3);
   ck_assert_int_eq(list->head->next->prev->value, 1);
   ck_assert_int_eq(list->head->next->next->prev->value, 2);
+  ck_assert_int_eq(list->tail->value, 6);
+  ck_assert_int_eq(list->tail->prev->value, 5);
 }
 END_TEST
 
