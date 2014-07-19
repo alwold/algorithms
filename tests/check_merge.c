@@ -216,12 +216,21 @@ START_TEST (test_linked_list_tree_flatten)
   llt_add_child(l3_node, 7);
   llt_add_value(list, 33);
   llt_add_value(list, 17);
-  llt_add_value(list, 2);
+  l1_node = llt_add_value(list, 2);
+  l2_node = llt_add_child(l1_node, 2);
+  l3_node = llt_add_child(l2_node, 12);
+  llt_node* l4_node = llt_add_child(l3_node, 21);
+  llt_add_after(l4_node, 3);
+  llt_add_after(l3_node, 5);
+  llt_add_after(l2_node, 7);
   llt_add_value(list, 1);
   ck_assert_int_seq(list->head->child->value, 6);
   ck_assert_int_seq(list->head->child->next->value, 25);
   ck_assert_int_seq(list->head->child->next->child->value, 8);
-
+  ck_assert_int_seq(list->head->next->next->next->child->value, 2);
+  ck_assert_int_seq(list->head->next->next->next->child->next->value, 7);
+  ck_assert_int_seq(list->head->next->next->next->child->child->value, 12);
+  ck_assert_int_seq(list->head->next->next->next->child->child->child->next->value, 3);
 }
 END_TEST
 
