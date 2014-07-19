@@ -7,6 +7,7 @@
 #include "../src/heap.h"
 #include "../src/util.h"
 #include "../src/bst.h"
+#include "../src/linked_list_tree.h"
 
 START_TEST (test_merge)
 {
@@ -182,6 +183,13 @@ START_TEST (test_bst_delete)
 
   bst_delete(root, root->right); // this one is the 5, and it has 99 under it, to the right
   ck_assert_int_eq(root->right->data, 99);
+}
+END_TEST
+
+START_TEST (test_linked_list_tree)
+{
+  int list[] = {1, 2, 3, 4, 5, 6};
+  llt_node* head = llt_create(list, 6);
 }
 END_TEST
 
