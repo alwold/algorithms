@@ -8,7 +8,7 @@ llt* llt_create() {
   return list;
 }
 
-void llt_add(llt* list, int value) {
+llt_node* llt_add(llt* list, int value) {
   llt_node* new_node = malloc(sizeof(llt_node));
   new_node->value = value;
   new_node->next = NULL;
@@ -28,6 +28,20 @@ void llt_add(llt* list, int value) {
     new_node->prev = current;
     list->tail = new_node;
   }
+  return new_node;
+}
+
+llt_node* llt_add_child(llt_node* parent, int value) {
+  if (parent->child != NULL) {
+    // can't add, there's already something
+    return NULL;
+  }
+  parent->child = malloc(sizeof(llt_node));
+  parent->child->next = NULL;
+  parent->child->prev = NULL;
+  parent->child->child = NULL;
+  parent->child->value = value;
+  return parent->child;
 }
 
 void llt_flatten(llt_node* head) {

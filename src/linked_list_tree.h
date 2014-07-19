@@ -15,6 +15,8 @@ typedef struct llt_node {
 
 llt* llt_create();
 
-void llt_add(llt* list, int value);
+llt_node* llt_add(llt* list, int value);
+
+llt_node* llt_add_child(llt_node* parent, int value);
 
 #endif

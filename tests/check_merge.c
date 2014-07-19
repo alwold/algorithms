@@ -204,6 +204,19 @@ START_TEST (test_linked_list_tree)
 }
 END_TEST
 
+START_TEST (test_linked_list_tree_flatten)
+{
+  llt* list = llt_create();
+  llt_node* node = llt_add_value(list, 5);
+  llt_add_child(node, 6);
+  llt_add_value(list, 33);
+  llt_add_value(list, 17);
+  llt_add_value(list, 2);
+  llt_add_value(list, 1);
+  ck_assert_int_seq(list->head->child->value, 6);
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
