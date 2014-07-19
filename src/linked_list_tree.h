@@ -19,4 +19,6 @@ llt_node* llt_add(llt* list, int value);
 
 llt_node* llt_add_child(llt_node* parent, int value);
 
+llt_node* llt_add_after(llt_node* prev, int value);
+
 #endif

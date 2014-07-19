@@ -44,6 +44,23 @@ llt_node* llt_add_child(llt_node* parent, int value) {
   return parent->child;
 }
 
+llt_node* llt_add_after(llt_node* prev, int value) {
+  if (prev == NULL) {
+    return NULL;
+  }
+  llt_node* orig_next = prev->next;
+  llt_node* new_node = malloc(sizeof(llt_node));
+  prev->next = new_node;
+  new_node->next = orig_next;
+  new_node->prev = prev;
+  new_node->child = NULL;
+  new_node->value = value;
+  if (orig_next != NULL) {
+    orig_next->prev = prev->next;
+  }
+  return new_node;
+}
+
 void llt_flatten(llt_node* head) {
   llt_node* current = head;
   while (current != NULL) {
