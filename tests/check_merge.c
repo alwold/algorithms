@@ -188,15 +188,17 @@ END_TEST
 
 START_TEST (test_linked_list_tree)
 {
-  llt_node* head = llt_add_value(NULL, 1);
-  llt_add_value(head, 2);
-  llt_add_value(head, 3);
-  llt_add_value(head, 4);
-  llt_add_value(head, 5);
-  llt_add_value(head, 6);
-  ck_assert_int_eq(head->value, 1);
-  ck_assert_int_eq(head->next->next->value, 3);
-  ck_assert_int_eq(head->next->prev->value, 1);
+  llt* list = llt_create();
+  llt_add_value(list, 1);
+  llt_add_value(list, 2);
+  llt_add_value(list, 3);
+  llt_add_value(list, 4);
+  llt_add_value(list, 5);
+  llt_add_value(list, 6);
+  ck_assert_int_eq(list->head->value, 1);
+  ck_assert_int_eq(list->head->next->next->value, 3);
+  ck_assert_int_eq(list->head->next->prev->value, 1);
+  ck_assert_int_eq(list->head->next->next->prev->value, 2);
 }
 END_TEST
 
