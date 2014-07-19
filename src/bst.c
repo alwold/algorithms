@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "bst.h"
+#include "stack.h"
 
 bst_node* bst_node_create(int data) {
   bst_node* node = malloc(sizeof(bst_node));
@@ -60,3 +61,27 @@ bst_node* bst_successor(bst_node* source) {
     return ancestor;
   }
 }
+
+/**
+ * preorder traversal without recursion
+ */
+char* bst_preorder_print(bst_node* root) {
+  stack* s = stack_init(10);
+  char *str = malloc(sizeof(char)*100);
+  str[0] = 0;
+  if (root != NULL) {
+    stack_push(s, root);
+    while ((root = (bst_node *)stack_pop(s)) != NULL) {
+      sprintf(str + strlen(str), "%d ", root->data);
+      if (root->right != NULL) {
+        stack_push(s, root->right);
+      }
+      if (root->left != NULL) {
+        stack_push(s, root->left);
+      }
+    }
+    strcat(str, "\n");
+    return str;
+  }
+}
+

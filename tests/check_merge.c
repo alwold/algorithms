@@ -187,6 +187,23 @@ START_TEST (test_bst_delete)
 }
 END_TEST
 
+START_TEST (test_bst_preorder_print)
+{
+  bst_node *root = bst_node_create(100);
+  bst_insert(root, 50);
+  bst_insert(root, 150);
+  bst_insert(root, 25);
+  bst_insert(root, 75);
+  bst_insert(root, 125);
+  bst_insert(root, 175);
+  bst_insert(root, 110);
+
+  char *str = bst_preorder_print(root);
+  ck_assert_str_eq(str, "100 50 25 75 150 125 110 175 \n");
+
+}
+END_TEST
+
 START_TEST (test_linked_list_tree)
 {
   llt* list = llt_create();
@@ -315,6 +332,7 @@ Suite *merge_suite(void) {
   tcase_add_test(bst, test_bst_insert);
   tcase_add_test(bst, test_bst_successor);
   tcase_add_test(bst, test_bst_delete);
+  tcase_add_test(bst, test_bst_preorder_print);
   suite_add_tcase(s, bst);
   TCase *stack = tcase_create("Stack");
   tcase_add_test(stack, test_stack);

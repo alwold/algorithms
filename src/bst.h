@@ -17,4 +17,6 @@ void bst_delete(bst_node* root, bst_node* target);
 
 bst_node* bst_successor(bst_node* source);
 
+char* bst_preorder_print(bst_node* root);
+
 #endif
