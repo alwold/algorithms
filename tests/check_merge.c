@@ -234,7 +234,42 @@ START_TEST (test_linked_list_tree_flatten)
 
   llt_flatten(list);
 
-  ck_assert_int_eq(list->head->next->next->next->next->next->value, 6);
+  llt_node *current = list->head->next->next->next->next->next; // set to just past the original end
+  ck_assert_int_eq(current->value, 6);
+  current = current->next;
+  ck_assert_int_eq(current->value, 25);
+  current = current->next;
+  ck_assert_int_eq(current->value, 6);
+  current = current->next;
+  ck_assert_int_eq(current->value, 2);
+  current = current->next;
+  ck_assert_int_eq(current->value, 7);
+  current = current->next;
+  ck_assert_int_eq(current->value, 8);
+  current = current->next;
+  ck_assert_int_eq(current->value, 9);
+  current = current->next;
+  ck_assert_int_eq(current->value, 12);
+  current = current->next;
+  ck_assert_int_eq(current->value, 5);
+  current = current->next;
+  ck_assert_int_eq(current->value, 7);
+  current = current->next;
+  ck_assert_int_eq(current->value, 21);
+  current = current->next;
+  ck_assert_int_eq(current->value, 3);
+  ck_assert_ptr_eq(current->next, NULL);
+  ck_assert_ptr_eq(list->tail, current);
+  current = current->prev;
+  ck_assert_int_eq(current->value, 21);
+  current = current->prev;
+  ck_assert_int_eq(current->value, 7);
+  current = current->prev;
+  ck_assert_int_eq(current->value, 5);
+  current = current->prev;
+  ck_assert_int_eq(current->value, 12);
+  // make sure original child relations are maintained
+  ck_assert_int_eq(current->child->value, 21);
 }
 END_TEST
 

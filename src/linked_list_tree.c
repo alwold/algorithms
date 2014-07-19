@@ -62,11 +62,20 @@ llt_node* llt_add_after(llt_node* prev, int value) {
 }
 
 void llt_flatten(llt* list) {
-  // llt_node* current = head;
-  // while (current != NULL) {
-  //   if (current->child != NULL) {
-  //     // move child list to end of this list
-  //   }
-  //   current = current->next;
-  // }
+  llt_node* current = list->head;
+  while (current != NULL) {
+    if (current->child != NULL) {
+      // copy child list to end of this list
+      list->tail->next = current->child;
+      // set child's prev link
+      list->tail->next->prev = list->tail;
+      // move tail to end of child data
+      llt_node* current2 = list->tail->next;
+      while (current2->next) {
+        current2 = current2->next;
+      }
+      list->tail = current2;
+    }
+    current = current->next;
+  }
 }
