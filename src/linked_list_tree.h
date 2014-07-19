@@ -21,4 +21,6 @@ llt_node* llt_add_child(llt_node* parent, int value);
 
 llt_node* llt_add_after(llt_node* prev, int value);
 
+void llt_flatten(llt* list);
+
 #endif

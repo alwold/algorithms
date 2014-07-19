@@ -189,12 +189,12 @@ END_TEST
 START_TEST (test_linked_list_tree)
 {
   llt* list = llt_create();
-  llt_add_value(list, 1);
-  llt_add_value(list, 2);
-  llt_add_value(list, 3);
-  llt_add_value(list, 4);
-  llt_add_value(list, 5);
-  llt_add_value(list, 6);
+  llt_add(list, 1);
+  llt_add(list, 2);
+  llt_add(list, 3);
+  llt_add(list, 4);
+  llt_add(list, 5);
+  llt_add(list, 6);
   ck_assert_int_eq(list->head->value, 1);
   ck_assert_int_eq(list->head->next->next->value, 3);
   ck_assert_int_eq(list->head->next->prev->value, 1);
@@ -207,30 +207,34 @@ END_TEST
 START_TEST (test_linked_list_tree_flatten)
 {
   llt* list = llt_create();
-  llt_node* l1_node = llt_add_value(list, 5);
+  llt_node* l1_node = llt_add(list, 5);
   llt_node* l2_node = llt_add_child(l1_node, 6);
   l2_node = llt_add_after(l2_node, 25);
   llt_node* l3_node = llt_add_child(l2_node, 8);
   l2_node = llt_add_after(l2_node, 6);
   l3_node = llt_add_child(l2_node, 9);
   llt_add_child(l3_node, 7);
-  llt_add_value(list, 33);
-  llt_add_value(list, 17);
-  l1_node = llt_add_value(list, 2);
+  llt_add(list, 33);
+  llt_add(list, 17);
+  l1_node = llt_add(list, 2);
   l2_node = llt_add_child(l1_node, 2);
   l3_node = llt_add_child(l2_node, 12);
   llt_node* l4_node = llt_add_child(l3_node, 21);
   llt_add_after(l4_node, 3);
   llt_add_after(l3_node, 5);
   llt_add_after(l2_node, 7);
-  llt_add_value(list, 1);
-  ck_assert_int_seq(list->head->child->value, 6);
-  ck_assert_int_seq(list->head->child->next->value, 25);
-  ck_assert_int_seq(list->head->child->next->child->value, 8);
-  ck_assert_int_seq(list->head->next->next->next->child->value, 2);
-  ck_assert_int_seq(list->head->next->next->next->child->next->value, 7);
-  ck_assert_int_seq(list->head->next->next->next->child->child->value, 12);
-  ck_assert_int_seq(list->head->next->next->next->child->child->child->next->value, 3);
+  llt_add(list, 1);
+  ck_assert_int_eq(list->head->child->value, 6);
+  ck_assert_int_eq(list->head->child->next->value, 25);
+  ck_assert_int_eq(list->head->child->next->child->value, 8);
+  ck_assert_int_eq(list->head->next->next->next->child->value, 2);
+  ck_assert_int_eq(list->head->next->next->next->child->next->value, 7);
+  ck_assert_int_eq(list->head->next->next->next->child->child->value, 12);
+  ck_assert_int_eq(list->head->next->next->next->child->child->child->next->value, 3);
+
+  llt_flatten(list);
+
+  ck_assert_int_eq(list->head->next->next->next->next->next->value, 6);
 }
 END_TEST
 
@@ -248,6 +252,9 @@ Suite *merge_suite(void) {
   tcase_add_test(ll, test_linked_list_reverse);
   tcase_add_test(ll, test_linked_list_mth_last_element);
   suite_add_tcase(s, ll);
+  TCase *llt = tcase_create("Linked List Tree");
+  tcase_add_test(llt, test_linked_list_tree_flatten);
+  suite_add_tcase(s, llt);
   TCase *heap = tcase_create("Heaps");
   tcase_add_test(heap, test_heapify);
   tcase_add_test(heap, test_heapsort);
