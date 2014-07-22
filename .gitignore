@@ -25,4 +25,5 @@ Makefile
 /src/quick_sort
 /src/bst
 /src/llt
+/src/int
 /tests/check_merge

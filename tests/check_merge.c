@@ -9,6 +9,7 @@
 #include "../src/bst.h"
 #include "../src/linked_list_tree.h"
 #include "../src/stack.h"
+#include "../src/int.h"
 
 START_TEST (test_merge)
 {
@@ -306,6 +307,16 @@ START_TEST (test_stack)
 }
 END_TEST
 
+START_TEST (test_int_to_str)
+{
+  ck_assert_str_eq(int_to_str(400), "400");
+  ck_assert_str_eq(int_to_str(452), "452");
+  ck_assert_str_eq(int_to_str(1238193821), "1238193821");
+  ck_assert_str_eq(int_to_str(0), "0");
+  ck_assert_str_eq(int_to_str(-134), "-134");
+}
+END_TEST
+
 Suite *merge_suite(void) {
   Suite *s = suite_create("Algorithms");
   TCase *ms = tcase_create("Merge Sort");
@@ -337,6 +348,9 @@ Suite *merge_suite(void) {
   TCase *stack = tcase_create("Stack");
   tcase_add_test(stack, test_stack);
   suite_add_tcase(s, stack);
+  TCase *i = tcase_create("Integer stuff");
+  tcase_add_test(i, test_int_to_str);
+  suite_add_tcase(s, i);
   return s;
 }
 
